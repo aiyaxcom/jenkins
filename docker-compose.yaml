@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  jenkins:
+    image: jenkins/jenkins:2.375.3-lts-centos7
+    restart: always
+    privileged: true
+    user: root
+    ports:
+     - 8081:8080
+     - 50000:50000
+    container_name: jenkins
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jdk1.8.0_351:/opt/jdk
+      - ./jdk-11.0.17:/opt/jdk11
+      - ./settings.xml:/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/Maven3.6.2/conf/settings.xml
